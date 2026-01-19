@@ -1,52 +1,15 @@
-import { cookies } from "next/headers";
-import { Suspense } from "react";
-import { Chat } from "@/components/chat";
-import { DataStreamHandler } from "@/components/data-stream-handler";
-import { DEFAULT_CHAT_MODEL } from "@/lib/ai/models";
-import { generateUUID } from "@/lib/utils";
-
-export default function Page() {
+export default function Home() {
   return (
-    <Suspense fallback={<div className="flex h-dvh" />}>
-      <NewChatPage />
-    </Suspense>
-  );
-}
-
-async function NewChatPage() {
-  const cookieStore = await cookies();
-  const modelIdFromCookie = cookieStore.get("chat-model");
-  const id = generateUUID();
-
-  if (!modelIdFromCookie) {
-    return (
-      <>
-        <Chat
-          autoResume={false}
-          id={id}
-          initialChatModel={DEFAULT_CHAT_MODEL}
-          initialMessages={[]}
-          initialVisibilityType="private"
-          isReadonly={false}
-          key={id}
-        />
-        <DataStreamHandler />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <Chat
-        autoResume={false}
-        id={id}
-        initialChatModel={modelIdFromCookie.value}
-        initialMessages={[]}
-        initialVisibilityType="private"
-        isReadonly={false}
-        key={id}
-      />
-      <DataStreamHandler />
-    </>
+    <main className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center px-6">
+        <h1 className="text-5xl font-bold">
+          Hi, I’m <span className="text-indigo-500">Dhwani Bhut</span>
+        </h1>
+        <p className="mt-6 text-gray-400 max-w-xl mx-auto">
+          Computer Science Engineering student passionate about AI, NLP,
+          research, and building meaningful digital products.
+        </p>
+      </div>
+    </main>
   );
 }
